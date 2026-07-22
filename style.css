@@ -1,0 +1,253 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  color-scheme: dark;
+  --bg: #000;
+  --fg: #fff;
+  --muted: rgba(255, 255, 255, 0.62);
+  --faint: rgba(255, 255, 255, 0.28);
+  --panel: rgba(18, 18, 18, 0.72);
+  --panel-hover: rgba(255, 255, 255, 0.96);
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-width: 320px;
+  height: 100%;
+  background:
+    radial-gradient(circle at 50% 42%, rgba(255, 255, 255, 0.035), transparent 40%),
+    var(--bg);
+  color: var(--fg);
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "SF Pro Display",
+    "Segoe UI",
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
+  overflow: hidden;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+button {
+  font: inherit;
+}
+
+#header {
+  position: relative;
+  z-index: 2;
+  flex: 0 0 auto;
+  padding: 0.9rem 1rem 0.35rem;
+  text-align: center;
+  pointer-events: none;
+}
+
+#header h1 {
+  margin: 0 0 0.22rem;
+  color: rgba(255, 255, 255, 0.96);
+  font-size: 1.05rem;
+  font-weight: 590;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+#leg-label {
+  min-height: 1.25em;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 0.96rem;
+  font-weight: 470;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.025em;
+}
+
+#map-wrap {
+  position: relative;
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+  padding: 0 0.65rem;
+  overflow: hidden;
+}
+
+#map {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: 1180px;
+  max-height: 80vh;
+  overflow: visible;
+}
+
+.us-outline {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.34);
+  stroke-width: 0.85;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.airport-dot {
+  fill: rgba(255, 255, 255, 0.34);
+  pointer-events: none;
+}
+
+.leg-path-dim {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.18);
+  stroke-width: 0.85;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+  pointer-events: none;
+}
+
+.marker {
+  fill: #fff;
+  filter:
+    drop-shadow(0 0 2px rgba(255, 255, 255, 1))
+    drop-shadow(0 0 7px rgba(255, 255, 255, 0.88))
+    drop-shadow(0 0 18px rgba(255, 255, 255, 0.36));
+  pointer-events: none;
+}
+
+.trail-segment {
+  fill: none;
+  stroke: #fff;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter:
+    drop-shadow(0 0 2px rgba(255, 255, 255, 0.56))
+    drop-shadow(0 0 7px rgba(255, 255, 255, 0.18));
+  vector-effect: non-scaling-stroke;
+  pointer-events: none;
+}
+
+#controls {
+  position: relative;
+  z-index: 2;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+  padding: 0.65rem 1rem 1rem;
+}
+
+#controls button {
+  appearance: none;
+  min-width: 5.2rem;
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  border-radius: 999px;
+  padding: 0.52rem 1rem;
+  background: var(--panel);
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 0.86rem;
+  font-weight: 520;
+  letter-spacing: 0.015em;
+  cursor: pointer;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  transition:
+    background 160ms ease,
+    color 160ms ease,
+    border-color 160ms ease,
+    transform 160ms ease,
+    opacity 160ms ease;
+}
+
+#controls button:hover:not(:disabled) {
+  background: var(--panel-hover);
+  color: #000;
+  border-color: #fff;
+  transform: translateY(-1px);
+}
+
+#controls button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+#controls button:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
+#controls button:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+#progress-label {
+  min-width: 108px;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.025em;
+  text-align: center;
+}
+
+@media (max-width: 700px) {
+  #header {
+    padding-top: 0.75rem;
+  }
+
+  #header h1 {
+    font-size: 0.9rem;
+  }
+
+  #leg-label {
+    font-size: 0.84rem;
+  }
+
+  #map-wrap {
+    padding-inline: 0.25rem;
+  }
+
+  #map {
+    max-height: 66vh;
+  }
+
+  #controls {
+    gap: 0.42rem;
+    padding: 0.55rem 0.65rem 0.75rem;
+  }
+
+  #controls button {
+    min-width: 4.6rem;
+    padding: 0.46rem 0.75rem;
+    font-size: 0.8rem;
+  }
+
+  #progress-label {
+    width: 100%;
+    min-width: 0;
+    order: -1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #controls button {
+    transition: none;
+  }
+
+  .marker,
+  .trail-segment {
+    filter: none;
+  }
+}
